@@ -25,7 +25,7 @@ public class Main {
 	}
 	
 	// 선택연산
-	 public static int[] selection_a(int[] a, int[] b) {
+	 public static int[] selection(int[] a, int[] b) {
 		 int sum = 0;
 		 int[] farr = new int[a.length];
 		 for(int i = 0; i < a.length; i++) {
@@ -39,68 +39,30 @@ public class Main {
 			 else ratio[i] = ratio[i - 1] + (double)farr[i] / (double)sum;
 		 }
 		 
-		 int[] sa = new int[a.length];
+		 int[] res = new int[a.length];
 		 Random r = new Random();
 		 for(int i = 0; i < a.length; i++) {
 			 double p = r.nextDouble();
-			 if(p < ratio[0]) sa[i] = a[0];
-			 else if(p < ratio[1]) sa[i] = a[1];
-			 else if(p < ratio[2]) sa[i] = a[2];
-			 else sa[i] = a[3];
+			 if(p < ratio[0]) res[i] = a[0];
+			 else if(p < ratio[1]) res[i] = a[1];
+			 else if(p < ratio[2]) res[i] = a[2];
+			 else res[i] = a[3];
 		 }
 		 
-		 return sa;
+		 return res;
 	 }
 	 
-	 public static int[] selection_b(int[] a, int[] b) {
-		 int sum = 0;
-		 int[] farr = new int[b.length];
-		 for(int i = 0; i < b.length; i++) {
-			 farr[i] = fx(a[i], b[i], 1);
-			 sum += farr[i];
-		 }
-		 
-		 double[] ratio = new double[b.length];
-		 for(int i = 0; i < b.length; i++) {
-			 if(i == 0) ratio[i] = (double)farr[i] / (double) sum;
-			 else ratio[i] = ratio[i - 1] + (double)farr[i] / (double)sum;
-		 }
-		 
-		 int[] sb = new int[b.length];
-		 Random r = new Random();
-		 for(int i = 0; i < b.length; i++) {
-			 double p = r.nextDouble();
-			 if(p < ratio[0]) sb[i] = b[0];
-			 else if(p < ratio[1]) sb[i] = b[1];
-			 else if(p < ratio[2]) sb[i] = b[2];
-			 else sb[i] = b[3];
-		 }
-		 
-		 return sb;
-	 }
 	 // 2진수로 만든 String 값의 0 Padding
 	 public static String int2String(String s) {
 	        return String.format("%7s", s).replace(' ', '0');
 	 }
 	 
 	 // 교차연산
-	 public static String[] cross_a(int[] a) {
+	 public static String[] crossover(int[] a) {
 		 String[] arr = new String[a.length];
 		 for(int i = 0; i < a.length; i += 2) {
 			 String bit1 = int2String(Integer.toBinaryString(a[i]));
 	         String bit2 = int2String(Integer.toBinaryString(a[i + 1]));
-	         
-	         arr[i] = bit1.substring(0, 3) + bit2.substring(3, 7);
-	         arr[i + 1] = bit2.substring(0, 3) + bit1.substring(3, 7);
-		 }
-		 return arr;
-	 }
-	 
-	 public static String[] cross_b(int[] b) {
-		 String[] arr = new String[b.length];
-		 for(int i = 0; i < b.length; i += 2) {
-			 String bit1 = int2String(Integer.toBinaryString(b[i]));
-	         String bit2 = int2String(Integer.toBinaryString(b[i + 1]));
 	         
 	         arr[i] = bit1.substring(0, 3) + bit2.substring(3, 7);
 	         arr[i + 1] = bit2.substring(0, 3) + bit1.substring(3, 7);
@@ -141,12 +103,12 @@ public class Main {
 		//ra, rb값이 변하게 되면 최적화된 a, b값이 나왔다는 뜻으로 반복 중지
 		while(ra == 0 && rb == 0) {
 			
-			int[] sa = selection_a(a, b);
-			String[] ca = cross_a(sa);
+			int[] sa = selection(a, b);
+			String[] ca = crossover(sa);
 			int[] ma = mutation(ca);
 			
-			int[] sb = selection_a(a, b);
-			String[] cb = cross_a(sb);
+			int[] sb = selection(b, a);
+			String[] cb = crossover(sb);
 			int[] mb = mutation(cb);
 			
 			int[] estiY = new int[y.length];
