@@ -16,8 +16,8 @@ public class Main {
 		int[] arr = new int[4];
 		System.out.printf("init 결과: ");
 		for(int i = 0; i < 4; i++) {
-			// 7자리 비트(1111111)까지 랜덤으로 얻음
-            arr[i] = r.nextInt(127 + 1);
+			// 7자리 비트(1111111)까지 랜덤으로 얻음 (-127 <= ~ <= 127)
+            arr[i] = r.nextInt(254 + 1) - 127;
             System.out.printf("%d ", arr[i]);
         }
 		System.out.println();
@@ -25,7 +25,7 @@ public class Main {
 	}
 	
 	// 선택연산
-	 public static int[] selection(int[] a, int[] b) {
+	 public static int[] selection_a(int[] a, int[] b) {
 		 int sum = 0;
 		 int[] farr = new int[a.length];
 		 for(int i = 0; i < a.length; i++) {
@@ -47,6 +47,33 @@ public class Main {
 			 else if(p < ratio[1]) res[i] = a[1];
 			 else if(p < ratio[2]) res[i] = a[2];
 			 else res[i] = a[3];
+		 }
+		 
+		 return res;
+	 }
+	 
+	 public static int[] selection_b(int[] a, int[] b) {
+		 int sum = 0;
+		 int[] farr = new int[b.length];
+		 for(int i = 0; i < b.length; i++) {
+			 farr[i] = fx(a[i], b[i], 1);
+			 sum += farr[i];
+		 }
+		 
+		 double[] ratio = new double[b.length];
+		 for(int i = 0; i < b.length; i++) {
+			 if(i == 0) ratio[i] = (double)farr[i] / (double) sum;
+			 else ratio[i] = ratio[i - 1] + (double)farr[i] / (double)sum;
+		 }
+		 
+		 int[] res = new int[b.length];
+		 Random r = new Random();
+		 for(int i = 0; i < b.length; i++) {
+			 double p = r.nextDouble();
+			 if(p < ratio[0]) res[i] = b[0];
+			 else if(p < ratio[1]) res[i] = b[1];
+			 else if(p < ratio[2]) res[i] = b[2];
+			 else res[i] = b[3];
 		 }
 		 
 		 return res;
@@ -103,11 +130,11 @@ public class Main {
 		//ra, rb값이 변하게 되면 최적화된 a, b값이 나왔다는 뜻으로 반복 중지
 		while(ra == 0 && rb == 0) {
 			
-			int[] sa = selection(a, b);
+			int[] sa = selection_a(a, b);
 			String[] ca = crossover(sa);
 			int[] ma = mutation(ca);
 			
-			int[] sb = selection(b, a);
+			int[] sb = selection_b(a, b);
 			String[] cb = crossover(sb);
 			int[] mb = mutation(cb);
 			
