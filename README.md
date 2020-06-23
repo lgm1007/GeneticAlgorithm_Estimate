@@ -4,9 +4,10 @@
 
 * 유전 알고리즘(`Genetic Algorithm`)으로 x축, y축 2가지 변수값을 가지고 있는 통계값의 일부만으로 전체 함수의 추정값을 얻는다.
 
-* ![](https://lh3.googleusercontent.com/proxy/Je6o16KugoRal7Qda2GfiDI-i-d4orMceUDl-uETZWGQ8OpjwGvkVNnwv1T-GklUie2WYkcy5uJmYcLQdDoFDVhNh1fzKx7LcGoY4CXLV58ya5pbjURoLM8ilZ7n3Hawrd5EmWOxOm8rh9B0DBWYOzyiuj9fd7Q99ILPNawzZ_05onZujqBastQXB6Dmi3Cd_-Gu6L75nsYEJMrbbUE1Rn2itka1JRjHY_zHKLrD0-H0SZiF)
+  ![](https://lh3.googleusercontent.com/proxy/bZ0N_YmpB4jIQ9PzBBdbPZHt1GaC5NRnnn5UIxAmRZQ4y_0KmVBWEHRXvjuECwI1mST2MIrYS9KEwXzvZvS8NsNoHr49lJ4Y1GDPUmf-LXU9KXmzdnijAZElr2Zgz0RMo-xvpw05BmapcjaphNZzj2BFu70XjjzwWFad79rkHKaAj_WbnxtMh3iQPcqEGE8TbJOYg8_RBpOgeepXvzZylTJUaphsUN7Xj2uR7U9wxEsBOeCU)
 
   다음 차트 중 남자 아이의 1세~7세 까지의 평균몸무게(kg) 값을 이용하여 실험한다.
+
 
 <br/>
 
